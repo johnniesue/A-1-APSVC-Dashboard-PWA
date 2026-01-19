@@ -1,3 +1,17 @@
+// -----------------------------
+// Supabase Client (Public / Read-only)
+// -----------------------------
+const SUPABASE_URL = "https://zzigzylypifjokskehkn.supabase.co";
+const SUPABASE_ANON_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp6aWd6eWx5cGlmam9rc2tlaGtuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIyODEzNDAsImV4cCI6MjA2Nzg1NzM0MH0.UjSODSs-tWPmXxKkyuaSIvSutx5dCnJsMhzslbFaBUg";
+
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);
+
+console.log("✅ Supabase client exists");
+
 // A-1 Dashboard PWA JavaScript (UPDATED for Option A local customer page)
 
 class A1Dashboard {
