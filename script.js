@@ -489,3 +489,37 @@ document.addEventListener("DOMContentLoaded", () => {
 if (typeof module !== "undefined" && module.exports) {
   module.exports = A1Dashboard;
 }
+// -----------------------------
+// G4: Live Dashboard Metrics
+// -----------------------------
+async function loadDashboardMetrics() {
+  if (!window.supabase) {
+    console.error("Supabase client not available");
+    return;
+  }
+
+  console.log("🔄 Loading dashboard metrics...");
+
+  try {
+    // ---- Open Invoices ----
+    const { count: openInvoices, error: invoiceError } =
+      await window.supabase
+        .from("invoices")
+        .select("*", { count: "exact", head: true })
+        .in("status", ["open", "sent", "overdue"]);
+
+    if (invoiceError) throw invoiceError;
+
+    console.log("📄 Open invoices:", openInvoices);
+
+    const invoiceMetric = document.querySelector(
+      '.metric-card:nth-child(2) .metric-value'
+    );
+    if (invoiceMetric) {
+      invoiceMetric.textContent = openInvoices ?? 0;
+    }
+
+  } catch (err) {
+    console.error("Dashboard metric load failed:", err);
+  }
+}
